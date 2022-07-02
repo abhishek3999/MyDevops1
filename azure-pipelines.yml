@@ -12,15 +12,15 @@ stages:
      name: default
     steps:
            
-    - task: VSBuild@1
-      inputs:
-        solution: '**\*.sln'
-        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package/p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container' 
+    # - task: VSBuild@1
+    #   inputs:
+    #     solution: '**\*.sln'
+    #     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package/p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
+    # - task: PublishBuildArtifacts@1
+    #   inputs:
+    #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    #     ArtifactName: 'drop'
+    #     publishLocation: 'Container' 
     - task: PowerShell@2
       displayName: 'Check Tag conforms to SemVer'
       condition: startsWith(variables['build.sourceBranch'], 'refs/tags/') # Only run this step when the trigger event is a tag push
