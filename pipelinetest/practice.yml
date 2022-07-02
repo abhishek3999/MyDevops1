@@ -23,31 +23,31 @@ stages:
         script: |
           Write-Host "Hi siddharth"
 
-- stage: job2 
+- stage: build2 
   jobs:
-  - job: windows2
+  - job: job2
     steps:
     - checkout: self
       lfs: true
       persistCredentials: true
 
     # - checkout: MyDevops1  
-    # - task: powershell@2
-    #   inputs: 
-    #     targetType: filepath
-    #     filepath: '$(Build.SourceDirectory)\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
-    #     errorActionPreference: continue
+    - task: powershell@2
+      inputs: 
+        targetType: filepath
+        filepath: '$(Build.SourceDirectory)\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
+        errorActionPreference: continue
 
-    - powershell: | 
+    # - powershell: | 
         
-        $x = 30
+        # $x = 30
 
-        if($x -eq 10){
-          write-host("Value of X is 10")
-        } elseif($x -eq 20){
-          write-host("Value of X is 20")
-        } elseif($x -eq 30){
-          write-host("Value of X is 30")
-        } else {
-          write-host("This is else statement")
-        }                 
+        # if($x -eq 10){
+        #   write-host("Value of X is 10")
+        # } elseif($x -eq 20){
+        #   write-host("Value of X is 20")
+        # } elseif($x -eq 30){
+        #   write-host("Value of X is 30")
+        # } else {
+        #   write-host("This is else statement")
+        # }                 
