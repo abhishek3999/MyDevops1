@@ -51,8 +51,8 @@ stages:
           Write-Host "git commit all stages"
           git commit -m 'change'
 
-          Write-Host "git push change"
-          git push origin $(Build.SourceBranchName)
+          # Write-Host "git push change"
+          # git push origin $(Build.SourceBranchName)
 
 
 
