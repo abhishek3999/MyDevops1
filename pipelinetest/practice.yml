@@ -9,7 +9,7 @@ stages:
 - stage: build  
 
   jobs:
-  - job: windows
+  - job: job1
     steps:
     - checkout: self
       lfs: true
@@ -23,7 +23,7 @@ stages:
         script: |
           Write-Host "Hi siddharth"
 
-- stage: build2 
+- stage: job2 
   jobs:
   - job: windows2
     steps:
