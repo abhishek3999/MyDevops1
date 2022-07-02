@@ -34,13 +34,13 @@ stages:
         projects: 'D:/PRACTICE-Pipeline/MyDevops1/tests/ExampleLibraryTests/ExampleLibraryTests.csproj'
         arguments: '--configuration $(BuildConfiguration) --no-restore'
 
-    # - task: DotNetCoreCLI@2
-    #   displayName: 'dotnet test'
-    #   inputs:
-    #     command: 'test'
-    #     projects: |
-    #       tests/**/*.csproj
-    #       arguments: '--collect "Code coverage"
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet test'
+      inputs:
+        command: 'test'
+        projects: |
+          D:/PRACTICE-Pipeline/MyDevops1/tests/ExampleLibraryTests/ExampleLibraryTests.csproj
+          arguments: '--collect "Code coverage"
 
 
 
