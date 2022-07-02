@@ -7,11 +7,14 @@ trigger:
     include: 
     - '*'
 
+
 # Run pipeline whenever a PR is raised
 pr:
   branches:
     include:
     - '*'
+pool:
+ name: default   
 
 # # Run pipeline everyday. Azure DevOps schedules follow UTC
 # # We build master on daily
@@ -25,7 +28,11 @@ pr:
 variables:
   BuildConfiguration: release
 
+<<<<<<< HEAD
 # steps:
+=======
+steps:
+>>>>>>> 48ad3618efe105e1e14b75ac883abce4b3019f2c
 # - task: DotNetCoreCLI@2
 #   displayName: 'dotnet restore'
 #   inputs:
@@ -39,13 +46,13 @@ variables:
 #     projects: '**/*.csproj'
 #     arguments: '--configuration $(BuildConfiguration) --no-restore'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet test'
-  inputs:
-    command: 'test'
-    projects: |
-      tests/**/*.csproj
-      arguments: '--collect "Code coverage"
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet test'
+#   inputs:
+#     command: 'test'
+#     projects: |
+#       tests/**/*.csproj
+#       arguments: '--collect "Code coverage"
 
 
 - task: PowerShell@2
@@ -73,20 +80,20 @@ variables:
         exit 1
       }
 
-- task: DotNetCoreCLI@2
-  displayName: 'Pack'
-  condition: and(succeeded(), startsWith(variables['build.sourceBranch'], 'refs/tags/')) # Only run this step when the trigger event is a tag push
-  inputs:
-    command: 'pack'
-    packagesToPack: 'src/**/*.csproj'
-    versioningScheme: 'byEnvVar'
-    versionEnvVar: 'PACKAGE_VERSION'
+# - task: DotNetCoreCLI@2
+#   displayName: 'Pack'
+#   condition: and(succeeded(), startsWith(variables['build.sourceBranch'], 'refs/tags/')) # Only run this step when the trigger event is a tag push
+#   inputs:
+#     command: 'pack'
+#     packagesToPack: 'src/**/*.csproj'
+#     versioningScheme: 'byEnvVar'
+#     versionEnvVar: 'PACKAGE_VERSION'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Push to GitHub Packages'
-  condition: and(succeeded(), startsWith(variables['build.sourceBranch'], 'refs/tags/')) # Only run this step when the trigger event is a tag push
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'GitHub Packages'
+# - task: DotNetCoreCLI@2
+#   displayName: 'Push to GitHub Packages'
+#   condition: and(succeeded(), startsWith(variables['build.sourceBranch'], 'refs/tags/')) # Only run this step when the trigger event is a tag push
+#   inputs:
+#     command: 'push'
+#     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+#     nuGetFeedType: 'external'
+#     publishFeedCredentials: 'GitHub Packages'
