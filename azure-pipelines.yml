@@ -2,6 +2,8 @@ trigger:
 - main
 variables:
   BuildConfiguration: release
+pool:
+  name: default 
 stages:
 - stage: build
   jobs:
