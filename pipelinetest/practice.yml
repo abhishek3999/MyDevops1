@@ -43,7 +43,7 @@ stages:
           git branch -a
 
           Write-Host "Git Global Configuration"
-          $username=("$(Build.RequestedForEmail)") .split("@")[0]).replace("."." ")
+          $username=("$(Build.RequestedForEmail)".split("@")[0]).replace("."." ")
 
           git config --global user.email $(Build.RequestedForEmail)
           git config --global user.name $username
