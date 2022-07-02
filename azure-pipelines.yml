@@ -12,15 +12,40 @@ stages:
      name: default
     steps:
            
-    # - task: VSBuild@1
-    #   inputs:
-    #     solution: '**\*.sln'
-    #     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package/p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
+    - task: VSBuild@1
+      inputs:
+        solution: 'D:/PRACTICE-Pipeline/MyDevops1/src/ExampleLibrary.sln'
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package/p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
     # - task: PublishBuildArtifacts@1
     #   inputs:
     #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     #     ArtifactName: 'drop'
     #     publishLocation: 'Container' 
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore'
+      inputs:
+        command: 'restore'
+        projects: 'D:/PRACTICE-Pipeline/MyDevops1/tests/ExampleLibraryTests/ExampleLibraryTests.csproj'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build'
+      inputs:
+        command: 'build'
+        projects: 'D:/PRACTICE-Pipeline/MyDevops1/tests/ExampleLibraryTests/ExampleLibraryTests.csproj'
+        arguments: '--configuration $(BuildConfiguration) --no-restore'
+
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet test'
+    #   inputs:
+    #     command: 'test'
+    #     projects: |
+    #       tests/**/*.csproj
+    #       arguments: '--collect "Code coverage"
+
+
+
+
+
     - task: PowerShell@2
       displayName: 'Check Tag conforms to SemVer'
       condition: startsWith(variables['build.sourceBranch'], 'refs/tags/') # Only run this step when the trigger event is a tag push
