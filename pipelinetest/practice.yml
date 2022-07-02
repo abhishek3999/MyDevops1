@@ -36,10 +36,22 @@ stages:
       inputs: 
         targetType: 'inline'
         script: |
-          # Write-Host "source branch name- $(Build.SourceBranchName)"
-          # Write-Host "source branch - $(Build.SourceBranchName)"
+          Write-Host "source branch name- $(Build.SourceBranchName)"
+          Write-Host "source branch - $(Build.SourceBranchName)"
 
           Write-Host "git check which current branch"
+          git branch -a
+
+          Write-Host "Git Global Configuration"
+          $username=("$(Build.RequestedForEmail)") .split("@")[0]).replace("."." ")
+
+          git config --global user.email $(Build.RequestedForEmail)
+          git config --global user.name $username
+
+          Write-Host "git switch current branch"
+          git switch $(Build.SourceBranchName)
+
+          Write-Host "git check with current branch"
           git branch -a
 
           Write-Host "git files"
@@ -51,8 +63,11 @@ stages:
           Write-Host "git commit all stages"
           git commit -m 'change'
 
-          # Write-Host "git push change"
-          # git push origin $(Build.SourceBranchName)
+          Write-Host "git push change"
+          git push origin $(Build.SourceBranchName)
+
+          Write-Host "git status after push"
+          git status
 
 
 
