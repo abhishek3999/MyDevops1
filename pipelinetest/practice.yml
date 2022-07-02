@@ -1,0 +1,60 @@
+trigger:
+- development
+
+pool:
+  name: default
+  
+
+stages:
+- stage: build  
+
+  jobs:
+  - job: windows
+    steps:
+    - checkout: self
+      lfs: true
+      persistCredentials: true
+
+    - checkout: MyDevops1  
+
+    - task: powershell@2
+      inputs: 
+        targetType: 'inline'
+        script: |
+          Write-Host "Hi siddharth"
+
+- stage: build   
+  jobs:
+  - job: windows2
+    steps:
+    - checkout: self
+      lfs: true
+      persistCredentials: true
+
+    - checkout: MyDevops1  
+    - task: powershell@2
+      inputs: 
+        targetType: 'inline'
+        script: |
+          Write-Host "source branch name- $(Build.SourceBranchName)"
+          Write-Host "source branch - $(Build.SourceBranchName)"
+
+          Write-Host "git check which current branch"
+          git branch -a
+
+          Write-Host "git files"
+          git status
+
+          Write-Host "git add all staging area"
+          git add -A
+
+          Write-Host "git commit all stages"
+          git commit -m 'change'
+
+          Write-Host "git push change"
+          git push origin $(Build.SourceBranchName)
+
+
+
+
+
