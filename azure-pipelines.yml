@@ -35,12 +35,12 @@ steps:
 #     command: 'restore'
 #     projects: '**/*.csproj'
 
-# - task: DotNetCoreCLI@2
-#   displayName: 'dotnet build'
-#   inputs:
-#     command: 'build'
-#     projects: '**/*.csproj'
-#     arguments: '--configuration $(BuildConfiguration) --no-restore'
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(BuildConfiguration) --no-restore'
 
 # - task: DotNetCoreCLI@2
 #   displayName: 'dotnet test'
