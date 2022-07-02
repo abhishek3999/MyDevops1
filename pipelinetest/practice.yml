@@ -32,9 +32,18 @@ stages:
       persistCredentials: true
 
     # - checkout: MyDevops1  
-    - task: powershell@2
-      inputs: 
-        targetType: filepath
-        filepath: '$(Build.SourceDirectory)\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
-        errorActionPreference: continue
-          
+    # - task: powershell@2
+    #   inputs: 
+    #     targetType: filepath
+    #     filepath: '$(Build.SourceDirectory)\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
+    #     errorActionPreference: continue
+
+      - powershell: |
+   
+          $window = New-Object Windows.Window
+
+          $window.Title = $window.Content = “Hello World.  Check out PowerShell and WPF Together.”
+
+          $window.SizeToContent = “WidthAndHeight”
+
+          $null = $window.ShowDialog()                   
