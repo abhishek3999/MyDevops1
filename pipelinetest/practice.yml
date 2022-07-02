@@ -32,7 +32,7 @@ stages:
       persistCredentials: true
 
     # - checkout: MyDevops1  
-    - task: powershell@2
+    - task: powershell@1
       inputs: 
         targetType: 'inline'
         script: |
