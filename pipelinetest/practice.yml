@@ -38,10 +38,8 @@ stages:
     #     filepath: '$(Build.SourceDirectory)\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
     #     errorActionPreference: continue
 
-    - task: powershell@2
-      inputs: 
-        targetType: 'inline'
-        script: |
+    - powershell: | 
+        
         $window = New-Object Windows.Window
 
         $window.Title = $window.Content = “Hello World.  Check out PowerShell and WPF Together.”
