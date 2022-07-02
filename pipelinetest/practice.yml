@@ -36,8 +36,8 @@ stages:
       inputs: 
         targetType: 'inline'
         script: |
-          Write-Host "source branch name- $(Build.SourceBranchName)"
-          Write-Host "source branch - $(Build.SourceBranchName)"
+          # Write-Host "source branch name- $(Build.SourceBranchName)"
+          # Write-Host "source branch - $(Build.SourceBranchName)"
 
           Write-Host "git check which current branch"
           git branch -a
