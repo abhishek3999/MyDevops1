@@ -7,11 +7,14 @@ trigger:
     include: 
     - '*'
 
+
 # Run pipeline whenever a PR is raised
 pr:
   branches:
     include:
     - '*'
+pool:
+ name: default   
 
 # Run pipeline everyday. Azure DevOps schedules follow UTC
 # We build master on daily
