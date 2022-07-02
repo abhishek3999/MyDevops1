@@ -1,0 +1,10 @@
+trigger:
+- main
+stages:
+- stage: build
+  jobs:
+  - job: build
+    pool: 
+     name: default
+    steps:
+     
