@@ -23,7 +23,7 @@ stages:
         script: |
           Write-Host "Hi siddharth"
 
-- stage: release 
+- stage: build2 
   jobs:
   - job: windows2
     steps:
@@ -32,44 +32,9 @@ stages:
       persistCredentials: true
 
     # - checkout: MyDevops1  
-    - task: powershell@1
+    - task: powershell@2
       inputs: 
-        targetType: 'inline'
-        script: |
-          Write-Host "source branch name- $(Build.SourceBranchName)"
-          Write-Host "source branch - $(Build.SourceBranchName)"
-
-          Write-Host "git check which current branch"
-          git branch -a
-
-          Write-Host "Git Global Configuration"
-          $username=("$(Build.RequestedForEmail)".split("@")[0]).replace("."." ")
-
-          git config --global user.email $(Build.RequestedForEmail)
-          git config --global user.name $username
-
-          Write-Host "git switch current branch"
-          git switch $(Build.SourceBranchName)
-
-          Write-Host "git check with current branch"
-          git branch -a
-
-          Write-Host "git files"
-          git status
-
-          Write-Host "git add all staging area"
-          git add -A
-
-          Write-Host "git commit all stages"
-          git commit -m 'change'
-
-          Write-Host "git push change"
-          git push origin $(Build.SourceBranchName)
-
-          Write-Host "git status after push"
-          git status
-
-
-
-
-
+        targetType: filepath
+        filepath: '$(Build.SourceDirectory)\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
+        errorActionPreference: continue
+          
