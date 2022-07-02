@@ -13,31 +13,31 @@ pr:
     include:
     - '*'
 
-# Run pipeline everyday. Azure DevOps schedules follow UTC
-# We build master on daily
-schedules:
-- cron: "0 14 * * *" # 00:00 AEST is 14:00 UTC
-  displayName: 'Daily Build'
-  branches:
-    include:
-    - master
+# # Run pipeline everyday. Azure DevOps schedules follow UTC
+# # We build master on daily
+# schedules:
+# - cron: "0 14 * * *" # 00:00 AEST is 14:00 UTC
+#   displayName: 'Daily Build'
+#   branches:
+#     include:
+#     - master
 
 variables:
   BuildConfiguration: release
 
-steps:
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet restore'
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
+# steps:
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet restore'
+#   inputs:
+#     command: 'restore'
+#     projects: '**/*.csproj'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet build'
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-    arguments: '--configuration $(BuildConfiguration) --no-restore'
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet build'
+#   inputs:
+#     command: 'build'
+#     projects: '**/*.csproj'
+#     arguments: '--configuration $(BuildConfiguration) --no-restore'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test'
