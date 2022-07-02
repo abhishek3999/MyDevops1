@@ -15,7 +15,7 @@ stages:
       lfs: true
       persistCredentials: true
 
-    - checkout: MyDevops1  
+    # - checkout: MyDevops1  
 
     - task: powershell@2
       inputs: 
@@ -31,7 +31,7 @@ stages:
       lfs: true
       persistCredentials: true
 
-    - checkout: MyDevops1  
+    # - checkout: MyDevops1  
     - task: powershell@2
       inputs: 
         targetType: 'inline'
