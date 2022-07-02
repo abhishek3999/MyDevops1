@@ -29,11 +29,11 @@ variables:
   BuildConfiguration: release
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet restore'
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet restore'
+#   inputs:
+#     command: 'restore'
+#     projects: '**/*.csproj'
 
 # - task: DotNetCoreCLI@2
 #   displayName: 'dotnet build'
@@ -76,20 +76,20 @@ steps:
         exit 1
       }
 
-- task: DotNetCoreCLI@2
-  displayName: 'Pack'
-  condition: and(succeeded(), startsWith(variables['build.sourceBranch'], 'refs/tags/')) # Only run this step when the trigger event is a tag push
-  inputs:
-    command: 'pack'
-    packagesToPack: 'src/**/*.csproj'
-    versioningScheme: 'byEnvVar'
-    versionEnvVar: 'PACKAGE_VERSION'
+# - task: DotNetCoreCLI@2
+#   displayName: 'Pack'
+#   condition: and(succeeded(), startsWith(variables['build.sourceBranch'], 'refs/tags/')) # Only run this step when the trigger event is a tag push
+#   inputs:
+#     command: 'pack'
+#     packagesToPack: 'src/**/*.csproj'
+#     versioningScheme: 'byEnvVar'
+#     versionEnvVar: 'PACKAGE_VERSION'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Push to GitHub Packages'
-  condition: and(succeeded(), startsWith(variables['build.sourceBranch'], 'refs/tags/')) # Only run this step when the trigger event is a tag push
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'GitHub Packages'
+# - task: DotNetCoreCLI@2
+#   displayName: 'Push to GitHub Packages'
+#   condition: and(succeeded(), startsWith(variables['build.sourceBranch'], 'refs/tags/')) # Only run this step when the trigger event is a tag push
+#   inputs:
+#     command: 'push'
+#     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+#     nuGetFeedType: 'external'
+#     publishFeedCredentials: 'GitHub Packages'
