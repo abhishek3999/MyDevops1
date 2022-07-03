@@ -50,4 +50,18 @@ stages:
         #   write-host("Value of X is 30")
         # } else {
         #   write-host("This is else statement")
-        # }                 
+        # }       
+
+    - task: powershell@2
+      inputs: 
+      targetType: inline
+      script: |
+        $url = "https://dev.azure.com/{organization}/{project}/_apis/build/builds?definations={definationsID}&api-version=6.0"
+        $connectionToken="Your PAT Here"
+        $base64AuthInfo= [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($connectionToken)"))
+
+          $buildPipeline= Invoke-RestMethod -Uri $url -Headers @{authorisation = "Basic $base64AuthInfo"} -Method Get
+
+          $BuildStatus= $buildPipeline.value.status | Select-Object -first 1
+
+          Write-Host this is Build Status: $BuildStatus
