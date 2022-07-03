@@ -81,24 +81,24 @@ stages:
       displayName: 'Stage1-Job1-Task1'
       inputs:
         targetType: 'inline'
-        script: 'Write-Host "Hello World"'
+        script: 'Write-Host "Hello World0"'
     - task: PowerShell@2
       displayName: 'Stage1-Job1-Task2'
       inputs:
         targetType: 'inline'
-        script: 'Write-Host "Hello World"'
+        script: 'Write-Host "Hello World1"'
   - job: Stage1_Job2
     steps:
     - task: PowerShell@2
       displayName: 'Stage1-Job2-Task1'
       inputs:
         targetType: 'inline'
-        script: 'Write-Host "Hello World"'
+        script: 'Write-Host "Hello World2"'
     - task: PowerShell@2
       displayName: 'Stage1-Job2-Task2'
       inputs:
         targetType: 'inline'
-        script: 'Write-Host "Hello World"'
+        script: 'Write-Host "Hello World3"'
 - stage: Stage2
   jobs:
   - job: Stage2_Job1
@@ -107,23 +107,23 @@ stages:
       displayName: 'Stage2-Job1-Task1'
       inputs:
         targetType: 'inline'
-        script: 'Write-Host "Hello World"'
+        script: 'Write-Host "Hello World4"'
     - task: PowerShell@2
       displayName: 'Stage2-Job1-Task2'
       inputs:
         targetType: 'inline'
-        script: 'Write-Host "Hello World"'
+        script: 'Write-Host "Hello World5"'
   - job: Stage2_Job2
     steps:
     - task: PowerShell@2
       displayName: 'Stage2-Job2-Task1'
       inputs:
         targetType: 'inline'
-        script: 'Write-Host "Hello World"'
+        script: 'Write-Host "Hello World6"'
     - task: PowerShell@2
       displayName: 'Stage2-Job2-Task2'
       inputs:
         targetType: 'inline'
-        script: 'Write-Host "Hello World"'
+        script: 'Write-Host "Hello World7"'
   
                 
