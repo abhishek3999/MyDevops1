@@ -1,42 +1,42 @@
-trigger:
-- development
+# trigger:
+# - development
 
-pool:
-  name: default
+# pool:
+#   name: default
   
 
-stages:
-- stage: build  
+# stages:
+# - stage: build  
 
-  jobs:
-  - job: job1
-    steps:
-    - checkout: self
-      lfs: true
-      persistCredentials: true
+#   jobs:
+#   - job: job1
+#     steps:
+#     - checkout: self
+#       lfs: true
+#       persistCredentials: true
 
-    # - checkout: MyDevops1  
+#     # - checkout: MyDevops1  
 
-    - task: powershell@2
-      inputs: 
-        targetType: 'inline'
-        script: |
-          Write-Host "Hi siddharth"
+#     - task: powershell@2
+#       inputs: 
+#         targetType: 'inline'
+#         script: |
+#           Write-Host "Hi siddharth"
 
-- stage: build2 
-  jobs:
-  - job: job2
-    steps:
-    - checkout: self
-      lfs: true
-      persistCredentials: true
+# - stage: build2 
+#   jobs:
+#   - job: job2
+#     steps:
+#     - checkout: self
+#       lfs: true
+#       persistCredentials: true
 
-    # - checkout: MyDevops1  
-    - task: powershell@2
-      inputs: 
-        targetType: filepath
-        filepath: 'D:\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
-        errorActionPreference: continue
+#     # - checkout: MyDevops1  
+#     - task: powershell@2
+#       inputs: 
+#         targetType: filepath
+#         filepath: 'D:\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
+#         errorActionPreference: continue
 
     # - powershell: | 
         
@@ -52,16 +52,78 @@ stages:
         #   write-host("This is else statement")
         # }       
 
-    - task: powershell@2
-      inputs: 
-      targetType: inline
-      script: |
-        $url = "https://dev.azure.com/{organization}/{project}/_apis/build/builds?definations={definationsID}&api-version=6.0"
-        $connectionToken="Your PAT Here"
-        $base64AuthInfo= [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($connectionToken)"))
+    # - task: powershell@2
+    #   inputs: 
+    #   targetType: inline
+    #   script: |
+    #     $url = "https://dev.azure.com/{organization}/{project}/_apis/build/builds?definations={definationsID}&api-version=6.0"
+    #     $connectionToken="Your PAT Here"
+    #     $base64AuthInfo= [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($connectionToken)"))
 
-          $buildPipeline= Invoke-RestMethod -Uri $url -Headers @{authorisation = "Basic $base64AuthInfo"} -Method Get
+    #       $buildPipeline= Invoke-RestMethod -Uri $url -Headers @{authorisation = "Basic $base64AuthInfo"} -Method Get
 
-          $BuildStatus= $buildPipeline.value.status | Select-Object -first 1
+    #       $BuildStatus= $buildPipeline.value.status | Select-Object -first 1
 
-          Write-Host this is Build Status: $BuildStatus
+    #       Write-Host this is Build Status: $BuildStatus
+
+trigger:
+- development
+ 
+pool:
+  name: default
+ 
+stages:
+- stage: Stage1
+  jobs:
+  - job: Stage1_Job1
+    steps:
+    - task: PowerShell@2
+      displayName: 'Stage1-Job1-Task1'
+      inputs:
+        targetType: 'inline'
+        script: 'Write-Host "Hello World"'
+    - task: PowerShell@2
+      displayName: 'Stage1-Job1-Task2'
+      inputs:
+        targetType: 'inline'
+        script: 'Write-Host "Hello World"'
+  - job: Stage1_Job2
+    steps:
+    - task: PowerShell@2
+      displayName: 'Stage1-Job2-Task1'
+      inputs:
+        targetType: 'inline'
+        script: 'Write-Host "Hello World"'
+    - task: PowerShell@2
+      displayName: 'Stage1-Job2-Task2'
+      inputs:
+        targetType: 'inline'
+        script: 'Write-Host "Hello World"'
+- stage: Stage2
+  jobs:
+  - job: Stage2_Job1
+    steps:
+    - task: PowerShell@2
+      displayName: 'Stage2-Job1-Task1'
+      inputs:
+        targetType: 'inline'
+        script: 'Write-Host "Hello World"'
+    - task: PowerShell@2
+      displayName: 'Stage2-Job1-Task2'
+      inputs:
+        targetType: 'inline'
+        script: 'Write-Host "Hello World"'
+  - job: Stage2_Job2
+    steps:
+    - task: PowerShell@2
+      displayName: 'Stage2-Job2-Task1'
+      inputs:
+        targetType: 'inline'
+        script: 'Write-Host "Hello World"'
+    - task: PowerShell@2
+      displayName: 'Stage2-Job2-Task2'
+      inputs:
+        targetType: 'inline'
+        script: 'Write-Host "Hello World"'
+  
+                
