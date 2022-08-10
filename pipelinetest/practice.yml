@@ -15,7 +15,7 @@ stages:
       lfs: true
       persistCredentials: true
 
-    - checkout: MyDevops1  
+    # - checkout: MyDevops1  
 
     - task: powershell@2
       inputs: 
@@ -27,16 +27,16 @@ stages:
   jobs:
   - job: job2
     steps:
-    # - checkout: self
-    #   lfs: true
-    #   persistCredentials: true
+    - checkout: self
+      lfs: true
+      persistCredentials: true
 
-      - checkout: MyDevops1  
-      - task: powershell@2
-        inputs: 
-          targetType: filepath
-          filepath: 'D:\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
-          errorActionPreference: continue
+      # - checkout: MyDevops1  
+    - task: powershell@2
+      inputs: 
+        targetType: filepath
+        filepath: 'D:\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
+        errorActionPreference: continue
 
     # - powershell: | 
         
