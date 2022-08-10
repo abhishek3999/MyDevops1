@@ -27,30 +27,30 @@ stages:
   jobs:
   - job: job2
     steps:
-    - checkout: self
-      lfs: true
-      persistCredentials: true
+    # - checkout: self
+    #   lfs: true
+    #   persistCredentials: true
 
-    - checkout: MyDevops1  
-    - task: powershell@2
-      inputs: 
-        targetType: filepath
-        filepath: 'D:\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
-        errorActionPreference: continue
+      - checkout: MyDevops1  
+      - task: powershell@2
+        inputs: 
+          targetType: filepath
+          filepath: 'D:\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
+          errorActionPreference: continue
 
-    - powershell: | 
+    # - powershell: | 
         
-        $x = 30
+    #     $x = 30
 
-        if($x -eq 10){
-          write-host("Value of X is 10")
-        } elseif($x -eq 20){
-          write-host("Value of X is 20")
-        } elseif($x -eq 30){
-          write-host("Value of X is 30")
-        } else {
-          write-host("This is else statement")
-        }       
+    #     if($x -eq 10){
+    #       write-host("Value of X is 10")
+    #     } elseif($x -eq 20){
+    #       write-host("Value of X is 20")
+    #     } elseif($x -eq 30){
+    #       write-host("Value of X is 30")
+    #     } else {
+    #       write-host("This is else statement")
+    #     }       
 
     # - task: powershell@2
     #   inputs: 
@@ -66,64 +66,64 @@ stages:
 
     #       Write-Host this is Build Status: $BuildStatus
 
-trigger:
-- development
+# trigger:
+# - development
  
-pool:
-  name: default
+# pool:
+#   name: default
  
-stages:
-- stage: Stage1
-  jobs:
-  - job: Stage1_Job1
-    steps:
-    - task: PowerShell@2
-      displayName: 'Stage1-Job1-Task1'
-      inputs:
-        targetType: 'inline'
-        script: 'Write-Host "Hello World0"'
-    - task: PowerShell@2
-      displayName: 'Stage1-Job1-Task2'
-      inputs:
-        targetType: 'inline'
-        script: 'Write-Host "Hello World1"'
-  - job: Stage1_Job2
-    steps:
-    - task: PowerShell@2
-      displayName: 'Stage1-Job2-Task1'
-      inputs:
-        targetType: 'inline'
-        script: 'Write-Host "Hello World2"'
-    - task: PowerShell@2
-      displayName: 'Stage1-Job2-Task2'
-      inputs:
-        targetType: 'inline'
-        script: 'Write-Host "Hello World3"'
-- stage: Stage2
-  jobs:
-  - job: Stage2_Job1
-    steps:
-    - task: PowerShell@2
-      displayName: 'Stage2-Job1-Task1'
-      inputs:
-        targetType: 'inline'
-        script: 'Write-Host "Hello World4"'
-    - task: PowerShell@2
-      displayName: 'Stage2-Job1-Task2'
-      inputs:
-        targetType: 'inline'
-        script: 'Write-Host "Hello World5"'
-  - job: Stage2_Job2
-    steps:
-    - task: PowerShell@2
-      displayName: 'Stage2-Job2-Task1'
-      inputs:
-        targetType: 'inline'
-        script: 'Write-Host "Hello World6"'
-    - task: PowerShell@2
-      displayName: 'Stage2-Job2-Task2'
-      inputs:
-        targetType: 'inline'
-        script: 'Write-Host "Hello World7"'
+# stages:
+# - stage: Stage1
+#   jobs:
+#   - job: Stage1_Job1
+#     steps:
+#     - task: PowerShell@2
+#       displayName: 'Stage1-Job1-Task1'
+#       inputs:
+#         targetType: 'inline'
+#         script: 'Write-Host "Hello World0"'
+#     - task: PowerShell@2
+#       displayName: 'Stage1-Job1-Task2'
+#       inputs:
+#         targetType: 'inline'
+#         script: 'Write-Host "Hello World1"'
+#   - job: Stage1_Job2
+#     steps:
+#     - task: PowerShell@2
+#       displayName: 'Stage1-Job2-Task1'
+#       inputs:
+#         targetType: 'inline'
+#         script: 'Write-Host "Hello World2"'
+#     - task: PowerShell@2
+#       displayName: 'Stage1-Job2-Task2'
+#       inputs:
+#         targetType: 'inline'
+#         script: 'Write-Host "Hello World3"'
+# - stage: Stage2
+#   jobs:
+#   - job: Stage2_Job1
+#     steps:
+#     - task: PowerShell@2
+#       displayName: 'Stage2-Job1-Task1'
+#       inputs:
+#         targetType: 'inline'
+#         script: 'Write-Host "Hello World4"'
+#     - task: PowerShell@2
+#       displayName: 'Stage2-Job1-Task2'
+#       inputs:
+#         targetType: 'inline'
+#         script: 'Write-Host "Hello World5"'
+#   - job: Stage2_Job2
+#     steps:
+#     - task: PowerShell@2
+#       displayName: 'Stage2-Job2-Task1'
+#       inputs:
+#         targetType: 'inline'
+#         script: 'Write-Host "Hello World6"'
+#     - task: PowerShell@2
+#       displayName: 'Stage2-Job2-Task2'
+#       inputs:
+#         targetType: 'inline'
+#         script: 'Write-Host "Hello World7"'
   
                 
