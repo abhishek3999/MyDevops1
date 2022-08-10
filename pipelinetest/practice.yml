@@ -1,56 +1,56 @@
-# trigger:
-# - development
+trigger:
+- development
 
-# pool:
-#   name: default
+pool:
+  name: default
   
 
-# stages:
-# - stage: build  
+stages:
+- stage: build  
 
-#   jobs:
-#   - job: job1
-#     steps:
-#     - checkout: self
-#       lfs: true
-#       persistCredentials: true
+  jobs:
+  - job: job1
+    steps:
+    - checkout: self
+      lfs: true
+      persistCredentials: true
 
-#     # - checkout: MyDevops1  
+    - checkout: MyDevops1  
 
-#     - task: powershell@2
-#       inputs: 
-#         targetType: 'inline'
-#         script: |
-#           Write-Host "Hi siddharth"
+    - task: powershell@2
+      inputs: 
+        targetType: 'inline'
+        script: |
+          Write-Host "Hi siddharth"
 
-# - stage: build2 
-#   jobs:
-#   - job: job2
-#     steps:
-#     - checkout: self
-#       lfs: true
-#       persistCredentials: true
+- stage: build2 
+  jobs:
+  - job: job2
+    steps:
+    - checkout: self
+      lfs: true
+      persistCredentials: true
 
-#     # - checkout: MyDevops1  
-#     - task: powershell@2
-#       inputs: 
-#         targetType: filepath
-#         filepath: 'D:\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
-#         errorActionPreference: continue
+    - checkout: MyDevops1  
+    - task: powershell@2
+      inputs: 
+        targetType: filepath
+        filepath: 'D:\PRACTICE-Pipeline\MyDevops1\pipelinetest\practice.ps1'
+        errorActionPreference: continue
 
-    # - powershell: | 
+    - powershell: | 
         
-        # $x = 30
+        $x = 30
 
-        # if($x -eq 10){
-        #   write-host("Value of X is 10")
-        # } elseif($x -eq 20){
-        #   write-host("Value of X is 20")
-        # } elseif($x -eq 30){
-        #   write-host("Value of X is 30")
-        # } else {
-        #   write-host("This is else statement")
-        # }       
+        if($x -eq 10){
+          write-host("Value of X is 10")
+        } elseif($x -eq 20){
+          write-host("Value of X is 20")
+        } elseif($x -eq 30){
+          write-host("Value of X is 30")
+        } else {
+          write-host("This is else statement")
+        }       
 
     # - task: powershell@2
     #   inputs: 
