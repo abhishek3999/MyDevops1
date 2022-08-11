@@ -4,10 +4,10 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+- main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: default
 
 steps:
 - task: NodeTool@0
