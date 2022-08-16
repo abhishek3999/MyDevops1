@@ -57,22 +57,22 @@ stages:
               CI: true
               REACT_APP_API_DOMAIN: 'http://dummy.restapiexample.com/api/v1/'
 
-          - task: CopyFiles@2
-            inputs:
-              SourceFolder: '$(System.DefaultWorkingDirectory)/public/dist/'
-              Contents: |
-                $(System.DefaultWorkingDirectory)/public/dist/**/*
-              TargetFolder: '$(Build.ArtifactStagingDirectory)/output-site'
-            displayName: 'Copy site files to artifact directory'
+          # - task: CopyFiles@2
+          #   inputs:
+          #     SourceFolder: '$(System.DefaultWorkingDirectory)/public/dist/'
+          #     Contents: |
+          #       $(System.DefaultWorkingDirectory)/public/dist/**/*
+          #     TargetFolder: '$(Build.ArtifactStagingDirectory)/output-site'
+          #   displayName: 'Copy site files to artifact directory'
 
-          - task: ArchiveFiles@2
-            displayName: 'Archive files'
-            inputs:
-              rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/output-site'
-              includeRootFolder: false
-              archiveType: zip
-              archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-Site.zip
-              replaceExistingArchive: true
+          # - task: ArchiveFiles@2
+          #   displayName: 'Archive files'
+          #   inputs:
+          #     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/output-site'
+          #     includeRootFolder: false
+          #     archiveType: zip
+          #     archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-Site.zip
+          #     replaceExistingArchive: true
 
           - task: PublishBuildArtifacts@1
             displayName: 'Publish Artifact: drop'
