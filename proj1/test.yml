@@ -1,24 +1,80 @@
 trigger:
-- master
+- main
+# resources:
+#   repositories:
+#   - repository: MyDevops1
+#     type: github
+#     name: MyDevops1
+#     ref: main
 
-pool:
-  name: default
+# pool:
+#   name: default
+# stages: 
+# - stage: buildapps
+#   jobs:
+#   steps:
+#   - task: Npm@1
+#     displayName: 'npm install'
+#     inputs:
+#       verbose: false
 
-steps:
-- task: Npm@1
-  displayName: 'npm install'
-  inputs:
-    verbose: false
+
+#   - task: Npm@1
+#     displayName: 'npm run build'
+#     inputs:
+#       command: custom
+#       verbose: false
+#       customCommand: 'run build'
+
+#   - task: PublishBuildArtifacts@1
+#     displayName: 'Publish Artifact: drop'
+#     inputs:
+#       PathtoPublish: build
 
 
-- task: Npm@1
-  displayName: 'npm run build'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run build'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  inputs:
-    PathtoPublish: build
+
+stages:
+  - stage: Build
+    displayName: Build stage
+    jobs:
+      - job: BuildSite
+        displayName: Build Site
+        pool:
+          name: default
+
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '12.x'
+            displayName: 'Install Node.js'
+
+          - script: |
+              npm ci
+              npm run build --if-present
+            displayName: 'npm install, build'
+            env:
+              CI: true
+              REACT_APP_API_DOMAIN: 'http://dummy.restapiexample.com/api/v1/'
+
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(System.DefaultWorkingDirectory)/build/'
+              Contents: |
+                $(System.DefaultWorkingDirectory)/build/**/*
+              TargetFolder: '$(Build.ArtifactStagingDirectory)/output-site'
+            displayName: 'Copy site files to artifact directory'
+
+          - task: ArchiveFiles@2
+            displayName: 'Archive files'
+            inputs:
+              rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/output-site'
+              includeRootFolder: false
+              archiveType: zip
+              archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-Site.zip
+              replaceExistingArchive: true
+
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish Artifact: drop'
+            inputs:
+              PathtoPublish: build

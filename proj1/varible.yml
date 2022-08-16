@@ -1,0 +1,11 @@
+variables:
+  # Subscription needs a storage account
+  azureSubscription: 'Azure Pass - Sponsorship'
+
+  # This needs to have a static website setup with the default container ($web)
+  clientBlobAccountName: 'mysitecontainer'
+
+
+
+  # A sample url to be consumed from the react app as environment variable
+  apiDomain: 'http://dummy.restapiexample.com/api/v1/'
