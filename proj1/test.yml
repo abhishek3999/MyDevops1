@@ -59,9 +59,9 @@ stages:
 
           - task: CopyFiles@2
             inputs:
-              SourceFolder: '$(System.DefaultWorkingDirectory)/build/'
+              SourceFolder: '$(System.DefaultWorkingDirectory)/dist/'
               Contents: |
-                $(System.DefaultWorkingDirectory)/build/**/*
+                $(System.DefaultWorkingDirectory)/dist/**/*
               TargetFolder: '$(Build.ArtifactStagingDirectory)/output-site'
             displayName: 'Copy site files to artifact directory'
 
